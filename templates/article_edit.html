@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script charset="utf-8" src="/static/plugin/kindeditor/kindeditor-all-min.js"></script>
+    <script charset="utf-8" src="/static/plugin/kindeditor/lang/zh-CN.js"></script>
+    <script type="text/javascript" src="/static/plugin/jquery/dist/jquery.min.js"></script>
+</head>
+<body>
+
+<textarea id="editor_id" style="width:700px;height:300px;" name="content"></textarea>
+<button id="edit_submit">提交</button>
+<div id="content_display"></div>
+
+</body>
+</html>
+
+<script>
+
+    // 关闭过滤模式，保留所有标签
+    KindEditor.ready(function (K) {
+        window.editor = K.create('#editor_id');
+    });
+
+    $("#edit_submit").click(function () {
+        console.log(editor.html())
+        {#console.log($("#editor_id").val());#}
+    });
+
+</script>
+
+

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <link rel="stylesheet" href="/static/plugin/bootstrap/dist/css/bootstrap.min.css">
+    <script type="text/javascript" src="/static/plugin/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/register.js"></script>
+    <style type="text/css">
+        .error{
+            color: red;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" href="#">
+                <li class=""><a href="#">博客园</a></li>
+                <li class=""><a href="/index/">首页</a></li>
+                <li class=""><a href="#">联系</a></li>
+                <li class=""><a href="#">订阅</a></li>
+                <li class=""><a href="#">管理</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" href="#">
+                <li class=""><a href="/login_slide_validate/">登录</a></li>
+                <li class=""><a href="/register/">注册</a></li>
+            </ul>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+    <div style="height: 40px"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <form  class="form-horizontal" action="/register/" method="post" autocomplete="off" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="{{ reg_obj.username.id_for_label }}">{{ reg_obj.username.label }}</label>
+                    <div class="col-sm-10">{{ reg_obj.username }}</div>
+                    <div class="col-sm-10 col-sm-offset-2 error" id="username"></div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="{{ reg_obj.phone.id_for_label }}">{{ reg_obj.phone.label }}</label>
+                    <div class="col-sm-10">{{ reg_obj.phone }}</div>
+                    <div class="col-sm-10 col-sm-offset-2 error" id="phone"></div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="{{ reg_obj.email.id_for_label }}">{{ reg_obj.email.label }}</label>
+                    <div class="col-sm-10">{{ reg_obj.email }}</div>
+                    <div class="col-sm-10 col-sm-offset-2 error" id="email"></div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="{{ reg_obj.password.id_for_label }}">{{ reg_obj.password.label }}</label>
+                    <div class="col-sm-10">{{ reg_obj.password }}</div>
+                    <div class="col-sm-10 col-sm-offset-2 error" id="password"></div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="{{ reg_obj.rep_password.id_for_label }}">{{ reg_obj.rep_password.label }}</label>
+                    <div class="col-sm-10">{{ reg_obj.rep_password }}</div>
+                    <div class="col-sm-10 col-sm-offset-2 error" id="rep_password"></div>
+                </div>
+                <div class="form-group">
+                    <label  class="col-sm-2 control-label" for="">头像上传</label>
+                    <div class="col-sm-10">
+                        <label  class="control-label" for="avatar">
+                            <img src="/media/avatars/default.png" alt="头像上传" id="avatar-img" style="width: 50px; height: 50px;border-radius: 10px;">
+                        </label>
+                        <input type="file" accept="image/*" id="avatar" style="display: none">
+                    </div>
+                    <div class="col-sm-10 col-sm-offset-2 error"></div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="v_code" class="v_code">验证码</label>
+                    <div class="col-sm-6"><input type="text" id="v_code" class="form-control" autocomplete="off" placeholder="请输入验证码"></div>
+                    <div class="col-sm-4" ><img src="/v_code/" id="v_code_img" alt="" style="width: 100%;height: 100%;border-radius: 10px"></div>
+                    <span class="col-sm-10 col-sm-offset-2 error" id="error"></span>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                      <input id="register" type="button" class="btn btn-success" value="注册">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

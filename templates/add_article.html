@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block title %}添加文章{% endblock %}
+
+{% block alone_js %}
+    <script type="text/javascript" src="/static/plugin/kindeditor/kindeditor-all-min.js"></script>
+    <script type="text/javascript" src="/static/plugin/kindeditor/lang/zh-CN.js"></script>
+    <script type="text/javascript" src="/static/js/article.js"></script>
+{% endblock %}
+
+<!-- 左边内容分类 -->
+{% block left_navigate_module %}
+{% endblock %}
+<!-- 左边内容分类 -->
+
+<!-- 内容区域 -->
+{% block content_body %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <form action="/blog/add_article/" method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="title">标题</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="标题" value="{{ article.title }}">
+                </div>
+                <div class="form-group">
+                    <label for="content">内容</label>
+                    <textarea name="content" id="content" cols="30" rows="20" class="form-control">{{ article.articledetail.content }}</textarea>
+                </div>
+                <div class="form-group">
+                    <label for="category">文章分类</label>
+                    <select name="category" id="category" class="form-control">
+                        {% for category in categories %}
+                            {% if category.id == article.category.id %}
+                                <option selected="selected" value="{{ category.id }}">{{ category.title }}</option>
+                            {% else %}
+                                <option value="{{ category.id }}">{{ category.title }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                </div>
+                <button id="unpublish" type="button" class="btn btn-success">取消</button>
+                <button type="submit" class="btn btn-success">发布</button>
+                <input type="hidden" name="is_update" value="{{ is_update|default:0 }}">
+                <input type="hidden" name="atricle" value="{{ article.id|default:0 }}">
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+<!-- 内容区域 -->
+
+<!-- 底部区域 -->
+{% block footer %}
+    {% include "footer_module.html" %}
+{% endblock %}
+<!-- 底部区域 -->
+
+{% block bottom_js %}
+<script type="text/javascript">
+    KindEditor.ready(function(K) {
+        window.editor = K.create('#content', {
+            "uploadJson": "/blog/upload/",
+            "extraFileUploadParams": {"csrfmiddlewaretoken": $("[name='csrfmiddlewaretoken']").val()}
+        });
+    });
+</script>
+{% endblock %}
+

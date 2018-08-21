@@ -1,0 +1,11 @@
+{% if request.user.username == "" or request.user.username is None %}
+    <div style="height: 30px;"></div>
+{% else %}
+    <div class="footer footer_custom">
+    <div class="container">
+        <div class="text-center footer_copyright" style="border-top: 1px solid #000000;margin-top: 30px;">
+            Copyright ©2018 {{ user.username }}
+        </div>
+    </div>
+</div>
+{% endif %}

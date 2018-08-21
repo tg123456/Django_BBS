@@ -1,0 +1,26 @@
+#cnblogs_post_body h2 {
+background: green !important;
+background: #406CA4 !important;
+border-radius: 4px 4px 4px 4px !important;
+box-shadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
+color: #FFFFFF;
+font-family: "微软雅黑", "宋体", "黑体", Arial;
+font-size: 17px;
+font-weight: bold;
+margin: 15px 0 !important;
+padding: 5px 0 5px 20px;
+}
+
+#MySignature{
+ border-radius: 10px !important;
+ box-shadow: 0 0 0 1px #5F5A4B, 1px 1px 6px 1px rgba(10, 10, 0, 0.5);
+ color: #FFFFFF;
+ font-family: "微软雅黑", "宋体", "黑体", Arial;
+ /*border:solid 1px #BFEFFF;*/
+ padding:10px;
+ background:#339900 url(//images.cnblogs.com/cnblogs_com/grenet/226272/o_o_o_info.png) no-repeat scroll 15px 50%;
+ padding-left:80px;}
+
+#MySignature div{
+  line-height: 20px;
+}

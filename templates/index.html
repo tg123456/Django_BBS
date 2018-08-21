@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block alone_js %}
+
+{% endblock %}
+
+<!-- 内容区域 -->
+{% block content_body %}
+    <!-- 右侧内容区 开始-->
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+
+        <div class="article-list">
+            <!-- 文章内容开始 -->
+            {% for article in articles %}
+                <div class="article">
+                    <div class="media">
+                        <div class="media-left head-portrait">
+                            <a href="">
+                                <img style="width: 100px;height: 100px; margin-top: 10px;border-radius: 10px;" src="/media/{{ article.user.avatar }}/" alt="" class="media-object">
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4><a class="titlelnk" href="/blog/{{ article.user.id }}/article/{{ article.id }}/"
+                                   target="_blank">{{ article.title }}</a></h4>
+                            <div class="article-desc">
+                                {{ article.desc }}
+                            </div>
+                            <div class="article-footer">
+                                <a href="/blog/{{ article.user.id }}/"><span>{{ article.user.username }}</span></a>
+                                <span>&nbsp;发布于&nbsp;{{ article.create_time|date:'Y-m-d H:i:s' }}</span>&nbsp;
+                                <span class="glyphicon glyphicon-comment hover_custom"><a>评论({{ article.comment_count }})</a></span>&nbsp;
+                                <span class="glyphicon glyphicon-thumbs-up hover_custom thumbs_Up"><a>点赞({{ article.up_count }})</a></span>
+                                <span class="text-danger"></span>
+                                <input id="{{ article.id }}" value="{{ article.user.id }}" type="hidden">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}
+        </div>
+
+        <!-- 分页 开始-->
+        <div class="text-center">
+            {{ page_html|safe }}
+        </div>
+        <!-- 分页 结束-->
+
+    </div>
+    </div>
+    <!-- 右侧侧内容区 结束-->
+{% endblock %}
+<!-- 内容区域 -->
+
+<!-- 底部区域 -->
+{% block footer %}
+    {% include "footer_module.html" %}
+{% endblock %}
+<!-- 底部区域 -->
+

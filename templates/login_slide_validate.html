@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="/static/plugin/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/common.css">
+    <script type="text/javascript" src="/static/plugin/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/login.js"></script>
+    <script type="text/javascript" src="http://static.geetest.com/static/tools/gt.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" href="#">
+                <li class=""><a href="#">博客园</a></li>
+                <li class=""><a href="/index/">首页</a></li>
+                <li class=""><a href="#">联系</a></li>
+                <li class=""><a href="#">订阅</a></li>
+                <li class=""><a href="#">管理</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" href="#">
+                <li class=""><a href="/login_slide_validate/">登录</a></li>
+                <li class=""><a href="/register/">注册</a></li>
+            </ul>
+        </div>
+    </div><!-- /.container-fluid -->
+</nav>
+<div class="container">
+    <div style="height: 30px"></div>
+    <div class="row">
+        <div class="col-md-6">
+            <form action="" method="post" class="form-horizontal" novalidate>
+                {% csrf_token %}
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="{{ login_obj.username.id_for_label }}">{{ login_obj.username.label }}</label>
+                    <div class="col-sm-10">{{ login_obj.username }}</div>
+                    <span class="help-blog"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="{{ login_obj.password.id_for_label }}">{{ login_obj.password.label }}</label>
+                    <div class="col-sm-10">{{ login_obj.password }}</div>
+                    <span class="help-blog"></span>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label" for="v-code" class="v-code">验证码</label>
+                    <div class="col-sm-6"><input type="text" id="v-code" class="form-control" autocomplete="off" placeholder="请输入验证码"></div>
+                    <div class="col-sm-4" ><img src="/v_code/" id="v-code-img" alt="" style="width: 100%;height: 100%;border-radius: 10px"></div>
+                    <span class="col-sm-10 col-sm-offset-2 error" id="error"></span>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-10 col-sm-offset-2">
+{#                        <input type="btn" id="login" class="btn-success btn" value="登錄">#}
+                        <button id="login_sv" type="button" class="btn-success btn" >登录</button>
+                        <div id="popup-captcha"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+{#<script>#}
+{#    var handlerPopup = function (captchaObj) {#}
+{#        // 成功的回调#}
+{#        captchaObj.onSuccess(function () {#}
+{#            var validate = captchaObj.getValidate();#}
+{#            $.ajax({#}
+{#                url: "/login_slide_validate/", // 进行二次验证#}
+{#                type: "post",#}
+{#                dataType: "json",#}
+{#                data: {#}
+{#                    username: $("#id_username").val(),#}
+{#                    password: $("#id_password").val(),#}
+{#                    geetest_challenge: validate.geetest_challenge,#}
+{#                    geetest_validate: validate.geetest_validate,#}
+{#                    geetest_seccode: validate.geetest_seccode#}
+{#                },#}
+{#                success: function (data) {#}
+{#                    if (data && (data.code === 1)) {#}
+{#                        window.location.href = '/index/';#}
+{#                        // $(document.body).html('<h1>登录成功</h1>');#}
+{#                    } else {#}
+{#                        $("#error").text("用戶名或密碼錯誤！");#}
+{#                        // $(document.body).html('<h1>登录失败</h1>');#}
+{#                    }#}
+{#                }#}
+{#            });#}
+{#        });#}
+{#        $("#login").click(function () {#}
+{#            captchaObj.show();#}
+{#        });#}
+{#        // 将验证码加到id为captcha的元素里#}
+{#        captchaObj.appendTo("#popup-captcha");#}
+{#        // 更多接口参考：http://www.geetest.com/install/sections/idx-client-sdk.html#}
+{#    };#}
+{#    // 验证开始需要向网站主后台获取id，challenge，success（是否启用failback）#}
+{#    $.ajax({#}
+{#        url: "/pcgetcaptcha/?t=" + (new Date()).getTime(), // 加随机数防止缓存#}
+{#        type: "get",#}
+{#        dataType: "json",#}
+{#        success: function (data) {#}
+{#            // 使用initGeetest接口#}
+{#            // 参数1：配置参数#}
+{#            // 参数2：回调，回调的第一个参数验证码对象，之后可以使用它做appendTo之类的事件#}
+{#            initGeetest({#}
+{#                gt: data.gt,#}
+{#                challenge: data.challenge,#}
+{#                product: "popup", // 产品形式，包括：float，embed，popup。注意只对PC版验证码有效#}
+{#                offline: !data.success // 表示用户后台检测极验服务器是否宕机，一般不需要关注#}
+{#                // 更多配置参数请参见：http://www.geetest.com/install/sections/idx-client-sdk.html#config#}
+{#            }, handlerPopup);#}
+{#        }#}
+{#    });#}
+{#</script>#}

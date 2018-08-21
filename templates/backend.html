@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}后台管理系统{% endblock %}
+
+{% block alone_js %}
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+    <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/static/plugin/laydate/laydate.js"></script>
+<script type="text/javascript" src="/static/js/article.js"></script>
+{% endblock %}
+
+<!-- 左边内容分类 -->
+{% block left_navigate_module %}
+{% endblock %}
+<!-- 左边内容分类 -->
+
+<!-- 内容区域 -->
+{% block content_body %}
+    {% csrf_token %}
+    <div class="container-fluid" style="margin-top: 70px">
+        <div class="row">
+            <div class="col-md-2">
+                <div class="panel panel-info">
+                  <div class="panel-heading">操作</div>
+                  <div class="panel-body">
+                      <a href="/blog/add_article/">添加新文章</a>
+                  </div>
+                </div>
+                <div class="panel panel-info">
+                  <div class="panel-heading">消息提示</div>
+                  <div class="panel-body" id="message">正常运行...</div>
+                </div>
+            </div>
+            <div class="col-md-10">
+                <table class="table table-striped">
+                  <thead>
+                    <tr>
+                        <th>标题</th>
+                        <th>评论数</th>
+                        <th>点赞数</th>
+                        <th>操作</th>
+                        <th>操作</th>
+                    </tr>
+                  </thead>
+                    <tbody>
+                        {% for article in articles %}
+                            <tr>
+                            <td><a href="/blog/{{ article.user.username }}/p/{{ article.id }}/">{{ article.title }}</a></td>
+                            <td>{{ article.comment_count }}</td>
+                            <td>{{ article.up_count }}</td>
+                            <td><a onclick="del_article({{ article.id }});" name = "{{ article.id }}">删除</a></td>
+                            <td><a href="/blog/edit_article/?article={{ article.id }}" class="edit_article">编辑</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框（Modal） -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"  style="display: none">
+                        &times;
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        消息提示
+                    </h4>
+                </div>
+                <div class="modal-body" style="color: #FF0000">
+                    确认删除吗？
+                </div>
+                <div class="modal-footer">
+                    <button id="cancel" type="button" class="btn btn-default" data-dismiss="modal">取消
+                    </button>
+                    <button id="sure" name="" type="button" class="btn btn-primary">
+                        确定
+                    </button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+
+{% endblock %}
+<!-- 内容区域 -->
+
+<!-- 底部区域 -->
+{% block footer %}
+    {% include "footer_module.html" %}
+{% endblock %}
+<!-- 底部区域 -->
+
+{% block bottom_js %}
+<script type="text/javascript">
+    function del_article() {
+        $("#myModal").modal("show");
+        id = arguments[0];
+        $("#sure").attr("name",id);
+    }
+</script>
+{% endblock %}
+
+
+
+

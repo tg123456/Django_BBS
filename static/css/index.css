@@ -1,0 +1,23 @@
+body {
+	background: #f4f4f4;
+}
+img{
+    height: 60px;
+    width: 60px;
+}
+.article{
+    margin-bottom: 30px;
+}
+.article-footer span{
+    margin-right: 15px;
+}
+.article-footer span:first-child{
+    margin-right: 5px;
+}
+.head-portrait{
+    padding-top: 14px;
+}
+.hover_custom{
+    cursor: pointer;
+}
+
