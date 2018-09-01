@@ -1,36 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>注册</title>
-    <link rel="stylesheet" href="/static/plugin/bootstrap/dist/css/bootstrap.min.css">
-    <script type="text/javascript" src="/static/plugin/jquery/dist/jquery.min.js"></script>
+{% extends 'base.html' %}
+
+{% block title %}后台管理系统{% endblock %}
+
+{% block alone_js %}
     <script type="text/javascript" src="/static/js/register.js"></script>
-    <style type="text/css">
-        .error{
-            color: red;
-        }
-    </style>
-</head>
-<body>
-<nav class="navbar navbar-inverse">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav" href="#">
-                <li class=""><a href="#">博客园</a></li>
-                <li class=""><a href="/index/">首页</a></li>
-                <li class=""><a href="#">联系</a></li>
-                <li class=""><a href="#">订阅</a></li>
-                <li class=""><a href="#">管理</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right" href="#">
-                <li class=""><a href="/login_slide_validate/">登录</a></li>
-                <li class=""><a href="/register/">注册</a></li>
-            </ul>
-        </div>
-    </div><!-- /.container-fluid -->
-</nav>
+{% endblock %}
+
+<!-- 左边内容分类 -->
+{% block left_navigate_module %}
+{% endblock %}
+<!-- 左边内容分类 -->
+
+<!-- 内容区域 -->
+{% block content_body %}
 <div class="container">
     <div style="height: 40px"></div>
     <div class="row">
@@ -87,5 +69,11 @@
         </div>
     </div>
 </div>
-</body>
-</html>
+{% endblock %}
+<!-- 内容区域 -->
+
+<!-- 底部区域 -->
+{% block footer %}
+    {% include "footer_module.html" %}
+{% endblock %}
+<!-- 底部区域 -->

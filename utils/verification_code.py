@@ -14,8 +14,8 @@ def random_verificate_code(length):
     v_code_str = ""
     for i in range(length):
         num_str = str(random.randint(0,9))
-        lowercase = chr(random.randint(65,90))
-        uppercase = chr(random.randint(97,122))
+        uppercase = chr(random.randint(65,90))
+        lowercase = chr(random.randint(97,122))
         v_code_list.append(random.choice([num_str,lowercase,uppercase]))
 
     v_code_str = "".join(v_code_list)

@@ -17,6 +17,29 @@ if __name__ == '__main__':
     #                                         create_time='2018-08-20 20:01:03')
     # print(comment_id)
 
+    # from django.core import serializers
+    #
+    # data = serializers.serialize('xml',models.UserInfo.objects.all())
+    # print(data)
+    #
+    # XMLSerizlizer = serializers.get_deserializer('xml')
+    # print(XMLSerizlizer)
+    #
+    # XMLSerializer = serializers.get_serializer("xml")
+    # xml_serializer = XMLSerializer()
+    # xml_serializer.serialize(models.UserInfo.objects.all())
+    # data = xml_serializer.getvalue()
+    # print(data)
+
+    # with open("file.xml",'w') as out:
+    #     serializers.serialize('xml', models.UserInfo.objects.all(),stream=out)
+        # xml_serializer.serialize(models.UserInfo.objects.all(),stream=out)
+
+    from django.core import serializers
+    data = serializers.serialize('xml',models.UserInfo.objects.all(),fields=('name'))
+    print(data)
+
+
 
 
 

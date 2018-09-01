@@ -10,7 +10,8 @@ from django import views
 from blog import forms
 from blog import models
 from bs4 import BeautifulSoup
-from utils import page, verification_code, geetest
+from utils import verification_code, geetest
+from utils import page
 import datetime
 import os
 
@@ -309,8 +310,7 @@ class RegView(views.View):
     def post(self, request):
         res = {"code": 0}
         v_code = request.POST.get("v_code", '1').upper()
-        print("v_code = ", v_code)
-        print(request.session.get("v_code", ""))
+
         if v_code != request.session.get("v_code", ""):
             res["code"] = 2
             res["error"] = "验证码错误！"
@@ -347,9 +347,6 @@ def backend(request):
 @login_required(login_url="/login_slide_validate/")
 def add_article(request):
 
-    print("add_article ============================================")
-    print(request.POST)
-
     if request.method == 'POST':
         #获取用户填写的文章内容
         is_update = int(request.POST.get("is_update",0))
@@ -368,7 +365,6 @@ def add_article(request):
             i.decompose()
 
         if is_update:
-            print("add_article update ============================================",is_update)
             with transaction.atomic():
                 #先创建文章记录
                 models.Article.objects.filter(id=atricle_id).update(
@@ -381,9 +377,6 @@ def add_article(request):
                     content=soup.prettify(),
                 )
         else:
-            print("add_article create ============================================")
-            # print(soup.text)
-            # print(soup.prettify())
             #写入数据库
             with transaction.atomic():
                 #先创建文章记录

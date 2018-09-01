@@ -25,10 +25,10 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
-
-    class Meta:
-        verbose_name = "博客"
-        verbose_name_plural = verbose_name
+    #
+    # class Meta:
+    #     verbose_name = "博客"
+    #     verbose_name_plural = verbose_name
 
 
 class Category(models.Model):
@@ -59,7 +59,7 @@ class Article(models.Model):
     title = models.CharField(max_length=50)
     desc = models.CharField(max_length=255)
     create_time = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(to="UserInfo")
+    user = models.ForeignKey(to="UserInfo",verbose_name="作者")
     category = models.ForeignKey(to="Category", null=True, blank=True)  # 文章分类
 
     comment_count = models.IntegerField(default=0)
